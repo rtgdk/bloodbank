@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% extends 'bank/base.html' %}
+{% load staticfiles %}
+	<html>
+	<head>
+		{% block title %}{{ city }}{% endblock %}
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+	</head>
+	<body>
+
+		{% block side_block %}
+		{% endblock %}
+		{% block body_block %}
+		<h1>Blood Banks in {{ city }}</h1>
+		<table class="table table-hover">
+<tr>
+    <th>Logo</th>
+    <th>Bank Name</th>
+    <th>Address</th>
+<th>Blood types</th>
+<th>Last Updated</th>
+<th>Navigation</th>
+<th>Call</th>
+  </tr>
+				{% for i in banks %}
+<tr>
+<td><img src="{{i.logo}}"  style="width:150px;height:100px;"></td>
+<td>{{ i.bank_name }}</td>
+<td>{{i.address}}</td>
+<td><button type="button" class="btn btn-info btn-lg " data-toggle="modal" data-target="#bloodcount">See Availability</button></td>
+<td>{{i.last_updated}}</td>
+<td> <a href="/bank/navigate/{{ i.user_name }}" target="_blank">Navigate</button></td>
+<td><a href= “tel:+91-{{i.phone_no}}>{{i.phone_no}}</td>
+</tr>
+
+ {% endfor %}  
+</table>
+{% for i in banks %}
+<div id="bloodcount" class="modal fade" role="dialog">
+  <div class="modal-dialog ">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+	<div class="modal-header">
+        <h4 class="modal-title">Blood Counts In {{ city }}</h4>
+      </div>
+      <div class="modal-body">
+	
+	
+       <table class="table table-hover">
+	<tr>
+    <th>Blood Type</th>
+    <th>Count</th>
+	</tr>
+
+
+<tr><td class='info' >A+</td><td>{{i.A_plus}}</td></tr>
+<tr><td >A-</td><td>{{i.A_minus}}</td></tr>
+<tr><td class='info'>B+</td><td>{{i.B_plus}}</td></tr>
+<tr><td>B-</td><td>{{i.B_minus}}</td></tr>
+<tr><td class='info'>AB+</td><td>{{i.AB_plus}}</td></tr>
+<tr><td>AB-</td><td>{{i.AB_minus}}</td></tr>
+<tr><td class='info'>O+</td><td>{{i.O_plus}}</td></tr>
+<tr><td>O-</td><td>{{i.O_minus}}</td></tr>
+<tr><td class='info'>Ffp</td><td>{{i.Ffp}}</td></tr>
+<tr><td>Plt</td><td>{{i.Plt}}</td></tr>
+<tr><td class='info'>Cry</td><td>{{i.Cry}}</td></tr>
+<tr><td>Lpl</td><td>{{i.Lpl}}</td></tr>
+<tr><td class='info'>Aph</td><td>{{i.Aph}}</td></tr>
+<tr><td>Unt</td><td>{{i.Unt}}</td></tr>
+<tr><td class='info'>Ca+</td><td>{{i.Ca_plus}}</td></tr>
+<tr><td>Ca-</td><td>{{i.Ca_minus}}</td></tr>
+<tr><td class='info'>Cb+</td><td>{{i.Cb_plus}}</td></tr>
+<tr><td>Cb-</td><td>{{i.Cb_minus}}</td></tr>
+<tr><td class='info'>Cab+</td><td>{{i.Cab_plus}}</td></tr>
+<tr><td>Cab-</td><td>{{i.Cab_minus}}</td></tr>
+<tr><td class='info'>Co+</td><td>{{i.Co_plus}}</td></tr>
+<tr><td>Co-</td><td>{{i.Co_minus}}</td></tr>
+
+</br>
+      <div class="modal-footer">
+	<h3 align="left" >{{ i.bank_name }}</h3>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+   
+ {% endfor %} 
+   </table>
+</div>
+ </div>
+
+  </div>
+ </div>
+
+
+		{% endblock %}
+
+		</body>
+</html>

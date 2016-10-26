@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+	<html>
+	<head>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCYpogDeGufep7hQfbEU2s0f3T9J-JB6nA"></script>
+<script type="text/javascript">
+    var lat = {{ banks.lat }};
+var lan = {{ banks.lon }};
+</script>
+
+
+<script type="text/javascript">
+    lati = {{ lat }};
+    longi = {{ lon }}
+    widget.init(lati);
+    widget.init(longi);
+</script>
+
+
+
+<script>
+function initialize() {
+	var lati = {{ banks.lat }};
+var lang = {{ banks.lon }};
+  var mapProp = {
+    center:new google.maps.LatLng(lati,longi),
+    zoom:15,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+
+<body>
+<h1>{{ banks.address }} </h1>
+<div id="googleMap" style="width:1000px;height:500px;"></div>
+</body>
+</html>
+
